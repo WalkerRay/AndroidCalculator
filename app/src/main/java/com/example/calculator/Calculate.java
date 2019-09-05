@@ -23,11 +23,11 @@ class Calculate {
         str = "(" + str + ")";
         // 括弧:先判断左括号和右括号是否相等,再判断括号是否左右是否匹配
         if (!isPiPei(str)) {
-            return null;
+            return "括号不匹配，请重新输入";
         }
         if (str.contains("()")) {
-            System.out.println("包含了空的括号，不符合,请检查重新输入");
-            return null;
+//            System.out.println("包含了空的括号，不符合,请检查重新输入");
+            return "包含了空的括号，不符合,请检查重新输入";
         }
         /*--------------集合存单字符,用于随时移除和添加--------------*/
 
