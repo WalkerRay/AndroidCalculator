@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         dot.setOnClickListener(new Dot());
         left.setOnClickListener(new Left());
         right.setOnClickListener(new Right());
+        equal.setOnClickListener(new Equal());
     }
 
     class Clear implements View.OnClickListener {
@@ -220,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //写入限制：相同的字符不能连续输入到TextView中（用于加减乘除等符号）
+    //写入限制：相同的字符不能连续输入到TextView中（用于加减乘除等符号）用于判断txt最后一位与c是否相同
     public boolean noRepeat(TextView txt, String c) {
         //String x = (((String)txt.getText()).charAt(txt.getText().length()-1))+"";
         String Txt = (String)txt.getText();
@@ -271,6 +272,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v){
             TextView txt = (TextView) findViewById(R.id.result);
+            String Txt = (String)txt.getText();
+            //如果前面有+号，直接将+变为-
+            if(!noRepeat(txt, "+")) {
+                txt.setText(Txt.substring(0, Txt.length() - 1) + "-");
+            }
             if(noRepeat(txt, "-")) {
                 txt.setText(txt.getText() + "-");
             }
@@ -281,14 +287,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v){
             TextView txt = (TextView) findViewById(R.id.result);
-            if(txt.getText().length() != 0 && noRepeat(txt, "+")) {
+            if(txt.getText().length() != 0 && noRepeat(txt, "+") && noRepeat(txt, "-")) {
                 txt.setText(txt.getText() + "+");
             }
         }
     }
 
-    //对%的输入进行限制，%的左侧只能是数字或%，不能是加减乘除等符号，%右侧不能直接连数字
-    public boolean percentLimit(TextView txt){
+    //对%和dot的输入进行限制，%的左侧只能是数字或%，不能是加减乘除等符号，%右侧不能直接连数字
+    public boolean pdLimit(TextView txt){
         String Txt = (String)txt.getText();
         String x = Txt.charAt(Txt.length()-1)+"";
         if(x.equals("+") || x.equals("-") || x.equals("*") || x.equals("/")){
@@ -302,17 +308,31 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v){
             TextView txt = (TextView) findViewById(R.id.result);
-            if(txt.getText().length() != 0 && percentLimit(txt) ) {
+            if(txt.getText().length() != 0 && pdLimit(txt) ) {
                 txt.setText(txt.getText() + "%");
             }
         }
+    }
+
+    public boolean dotLimit(TextView txt){
+        String Txt = (String)txt.getText();
+        String[] TxtSplit = Txt.split("\\.");
+        int l = TxtSplit.length - 1;
+        if(TxtSplit.length == 1){
+            return true;
+        }
+        if(TxtSplit[l].contains("+") || TxtSplit[l].contains("-") || TxtSplit[l].contains("*") || TxtSplit[l].contains("/")){
+            return true;
+        }
+        return false;
+
     }
 
     class Dot implements View.OnClickListener {
         @Override
         public void onClick(View v){
             TextView txt = (TextView) findViewById(R.id.result);
-            if(txt.getText().length() != 0 && noRepeat(txt, ".") && percentLimit(txt)) {
+            if(txt.getText().length() != 0 && noRepeat(txt, ".") && noRepeat(txt, "%") && pdLimit(txt) && dotLimit(txt)) {
                 txt.setText(txt.getText() + ".");
             }
         }
@@ -335,6 +355,16 @@ public class MainActivity extends AppCompatActivity {
 
             txt.setText(txt.getText() + ")");
 
+        }
+    }
+
+    class Equal implements View.OnClickListener {
+        @Override
+        public void onClick(View v){
+            TextView txt = (TextView) findViewById(R.id.result);
+            String Txt = (String)txt.getText();
+            Calculate cal = new Calculate();
+            txt.setText(cal.calcDemo(Txt));
         }
     }
 }

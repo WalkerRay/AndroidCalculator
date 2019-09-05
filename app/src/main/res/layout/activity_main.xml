@@ -42,7 +42,7 @@
             android:layout_gravity="fill"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:textSize="60dp"
+            android:textSize="30dp"
             tools:ignore="MissingConstraints" />
 
         <Button
