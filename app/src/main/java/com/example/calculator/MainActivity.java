@@ -129,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
         Button btn0 = (Button)findViewById(R.id.num0);
         Button left = (Button)findViewById(R.id.openCurly);
         Button right = (Button)findViewById(R.id.closeCurly);
+        Button sin = (Button)findViewById(R.id.sin);
+        Button cos = (Button)findViewById(R.id.cos);
+        Button tan = (Button)findViewById(R.id.tan);
 
         btn1.setOnClickListener(new Listener1());
         btn2.setOnClickListener(new Listener2());
@@ -151,6 +154,9 @@ public class MainActivity extends AppCompatActivity {
         left.setOnClickListener(new Left());
         right.setOnClickListener(new Right());
         equal.setOnClickListener(new Equal());
+        sin.setOnClickListener(new Sin());
+        cos.setOnClickListener(new Cos());
+        tan.setOnClickListener(new Tan());
     }
 
 
@@ -541,6 +547,45 @@ public class MainActivity extends AppCompatActivity {
             String Txt = (String)txt.getText();
             Calculate cal = new Calculate();
             txt.setText(cal.calcDemo(Txt));
+        }
+    }
+
+    class Sin implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            TextView txt = (TextView) findViewById(R.id.result);
+            if(MulSupJudForLeftCurly(txt)){
+                txt.setText(txt.getText() + "*sin(");
+            }
+            else {
+                txt.setText(txt.getText() + "sin(");
+            }
+        }
+    }
+
+    class Cos implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            TextView txt = (TextView) findViewById(R.id.result);
+            if(MulSupJudForLeftCurly(txt)){
+                txt.setText(txt.getText() + "*cos(");
+            }
+            else {
+                txt.setText(txt.getText() + "cos(");
+            }
+        }
+    }
+
+    class Tan implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            TextView txt = (TextView) findViewById(R.id.result);
+            if(MulSupJudForLeftCurly(txt)){
+                txt.setText(txt.getText() + "*tan(");
+            }
+            else {
+                txt.setText(txt.getText() + "tan(");
+            }
         }
     }
 }

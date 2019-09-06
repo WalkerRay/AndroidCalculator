@@ -11,7 +11,6 @@ class noCurlyCalculate {
         ArrayList<String> ops = getOps(str);
         ArrayList<Double> num = getNum(str);
         String computable = "true";
-        //System.out.println(num);
         // 先乘除再加减
         for (int i = 0; i < ops.size(); i++) {
             if (ops.get(i).contains("*") || ops.get(i).contains("/")) {
@@ -22,6 +21,7 @@ class noCurlyCalculate {
                     if(num.isEmpty()){
                         return "false";
                     }
+
                     double d2 = num.remove(i);
                     double number = ArithUtil.mul(d1, d2);
                     //再加上
@@ -68,7 +68,6 @@ class noCurlyCalculate {
             }
         }
         int size = num.size();
-        //System.out.println(num);
         Double[] Num = (Double[])num.toArray(new Double[size]);
         String result = Num[0].toString();
         return result;
@@ -82,7 +81,7 @@ class noCurlyCalculate {
         str = change(str);
         ArrayList<Double> list = new ArrayList();
 
-        String[] split = str.split("[\\+\\-\\*/]");
+        String[] split = str.split("\\+|\\-|\\*|/");
         for (int i = 0; i < split.length; i++) { // @3,5,@4,9,@3
             String s = split[i];
             // 再把@变成-
@@ -98,10 +97,35 @@ class noCurlyCalculate {
                 }
                 s = String.valueOf(S);
             }
-            //System.out.println(s);
-            list.add(Double.parseDouble(s));
+            if(s.contains("sin")){
+                String[] triNum = s.split("n");
+                double d = Double.parseDouble(triNum[1]);
+                double dRadians = Math.toRadians(d);
+                double number = Double.parseDouble(String.format("%.5f", Math.sin(dRadians)));
+                s = String.valueOf(number);
+            }
+            if(s.contains("tan")){
+                String[] triNum = s.split("n");
+                double d = Double.parseDouble(triNum[1]);
+                double dRadians = Math.toRadians(d);
+                double number = Double.parseDouble(String.format("%.5f", Math.tan(dRadians)));
+                s = String.valueOf(number);
+            }
+            if(s.contains("cos")){
+                String[] triNum = s.split("s");
+                double d = Double.parseDouble(triNum[1]);
+                double dRadians = Math.toRadians(d);
+                double number = Double.parseDouble(String.format("%.5f", Math.cos(dRadians)));
+                s = String.valueOf(number);
+            }
+            //System.out.println(s+",");
+            if(!s.equals("")) {
+                list.add(Double.parseDouble(s));
+            }
+//            else{
+//                list.add(0.0);
+//            }
         }
-
         return list;
     }
 
@@ -129,7 +153,7 @@ class noCurlyCalculate {
         // -变@
         str = change(str);
         // @3+5*@4-9/@3
-        String[] split = str.split("[0-9\\.@%]");// 表示0-9包括小数和@和%
+        String[] split = str.split("[0-9|\\.|@|%|sin|cos|tan]");// 表示0-9包括小数和@和%
         for (int i = 0; i < split.length; i++) {
             if (split[i].contains("+") || split[i].contains("-") || split[i].contains("*") || split[i].contains("/")) {
                 list.add(split[i]);

@@ -14,12 +14,13 @@ class Calculate {
 //    }
 
 //    public static void main(String[] args) {
-////        String str = "3+12/(2-8)+7*((55+1)/2+0.2*(9-1))/2+10";
-////        System.out.println(calcDemo(str));
-//        double a = 8;
-//        double b = 0;
-//        System.out.println(ArithUtil.div(a, b));
-//    }
+//        String str = "1sin(30)";
+//        String[] split = str.split("\\+|\\-|\\*|/|sin");
+//        //String[] split = str.split("sin");
+//        for(int i = 0; i < split.length; i++) {
+//            System.out.println(split[i]);
+//        }
+//   }
 
     public static String calcDemo(String str) {
         // 加上括号,这样就能当作最终的表达式并判断，最终求出结果
