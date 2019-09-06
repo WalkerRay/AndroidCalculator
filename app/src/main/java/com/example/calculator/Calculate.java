@@ -14,8 +14,11 @@ class Calculate {
 //    }
 
 //    public static void main(String[] args) {
-//        String str = "3+12/(2-8)+7*((55+1)/2+0.2*(9-1))/2+10";
-//        System.out.println(calcDemo(str));
+////        String str = "3+12/(2-8)+7*((55+1)/2+0.2*(9-1))/2+10";
+////        System.out.println(calcDemo(str));
+//        double a = 8;
+//        double b = 0;
+//        System.out.println(ArithUtil.div(a, b));
 //    }
 
     public static String calcDemo(String str) {
@@ -60,8 +63,11 @@ class Calculate {
                 }
                 // 获取括号中的式子,计算成结果,在放入集合变成新的式子
                 String strCalc = part.substring(1, part.length() - 1);//这里1到part.length()-1是去除了左右两边括号的
-                double num = noCurlyCalculate.Result(strCalc);
-                str_list.add(s, String.valueOf(num));
+                String num = noCurlyCalculate.Result(strCalc);
+                if(num.equals("false")){
+                    return "错误";
+                }
+                str_list.add(s, num);
 
                 //System.out.println(str_list);
                 i = i - partLength + 1; // 移掉后,占一位,++后要能获取"本来i位置"的下一位
@@ -134,8 +140,5 @@ class Calculate {
         }
         return isPiPei;
     }
-
-
-
 
 }

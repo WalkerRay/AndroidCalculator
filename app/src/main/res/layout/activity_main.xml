@@ -31,7 +31,7 @@
         android:layout_height="600dp"
         android:columnCount="4"
         android:orientation="horizontal"
-        android:rowCount="6"
+        android:rowCount="7"
         tools:ignore="MissingConstraints"><!--水平排列 -->
 
         <TextView

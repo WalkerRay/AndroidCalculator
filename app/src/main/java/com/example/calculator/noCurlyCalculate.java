@@ -7,9 +7,10 @@ class noCurlyCalculate {
 
 
 
-    public static double Result(String str) {
+    public static String Result(String str) {
         ArrayList<String> ops = getOps(str);
         ArrayList<Double> num = getNum(str);
+        String computable = "true";
         //System.out.println(num);
         // 先乘除再加减
         for (int i = 0; i < ops.size(); i++) {
@@ -18,6 +19,9 @@ class noCurlyCalculate {
                 if (op.equals("*")) {
                     // 从数字集合取对应和后面一位数字
                     double d1 = num.remove(i);
+                    if(num.isEmpty()){
+                        return "false";
+                    }
                     double d2 = num.remove(i);
                     double number = ArithUtil.mul(d1, d2);
                     //再加上
@@ -25,7 +29,14 @@ class noCurlyCalculate {
                 }
                 if (op.equals("/")) {
                     double d1 = num.remove(i);
+                    if(num.isEmpty()){
+                        return "false";
+                    }
                     double d2 = num.remove(i);
+                    if(d2 == 0){
+                        computable = "false";
+                        return computable;
+                    }
                     double number = ArithUtil.div(d1, d2);
                     num.add(i, number);
                 }
@@ -37,6 +48,9 @@ class noCurlyCalculate {
             String op = ops.remove(0);
             if (op.equals("+")) {
                 double d1 = num.remove(0);
+                if(num.isEmpty()){
+                    return "false";
+                }
                 double d2 = num.remove(0);
                 double number = ArithUtil.add(d1, d2);
                 //System.out.println(number);
@@ -45,6 +59,9 @@ class noCurlyCalculate {
             }
             if (op.equals("-")) {
                 double d1 = num.remove(0);
+                if(num.isEmpty()){
+                    return "false";
+                }
                 double d2 = num.remove(0);
                 double number = ArithUtil.sub(d1, d2);
                 num.add(0, number);
@@ -53,7 +70,8 @@ class noCurlyCalculate {
         int size = num.size();
         //System.out.println(num);
         Double[] Num = (Double[])num.toArray(new Double[size]);
-        return Num[0];
+        String result = Num[0].toString();
+        return result;
     }
 
     /**
@@ -93,6 +111,9 @@ class noCurlyCalculate {
             // @3+5*-4-9/-3
             if (i == 0 && chars[i] == '-') {
                 str = '@' + str.substring(i + 1);
+            }
+            if(chars[i] == '*' && i == chars.length-1 || chars[i] == '/' && i == chars.length-1){
+                break;
             }
             // @3+5*@4-9/@3
             if (chars[i] == '*' && chars[i + 1] == '-' || chars[i] == '/' && chars[i + 1] == '-') {
