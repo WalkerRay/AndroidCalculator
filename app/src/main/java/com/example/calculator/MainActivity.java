@@ -14,8 +14,11 @@ import android.content.res.Configuration;
 
 public class MainActivity extends AppCompatActivity {
 
+    //用于横竖屏切换时保存TextView数据
     protected String TAG = "buder";
     protected TextView mTextView;
+    //用于标记切换角度制弧度制的状态
+    private int flag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
         Button sin = (Button)findViewById(R.id.sin);
         Button cos = (Button)findViewById(R.id.cos);
         Button tan = (Button)findViewById(R.id.tan);
+        Button change = (Button)findViewById(R.id.RAD_DEG);
 
         btn1.setOnClickListener(new Listener1());
         btn2.setOnClickListener(new Listener2());
@@ -157,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
         sin.setOnClickListener(new Sin());
         cos.setOnClickListener(new Cos());
         tan.setOnClickListener(new Tan());
+        change.setOnClickListener(new Change());
     }
 
 
@@ -544,9 +549,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v){
             TextView txt = (TextView) findViewById(R.id.result);
+            Button mark = (Button) findViewById(R.id.RAD_DEG);
+            String Mark = (String)mark.getText();
             String Txt = (String)txt.getText();
             Calculate cal = new Calculate();
-            txt.setText(cal.calcDemo(Txt));
+            txt.setText(cal.calcDemo(Txt, Mark));
         }
     }
 
@@ -585,6 +592,26 @@ public class MainActivity extends AppCompatActivity {
             }
             else {
                 txt.setText(txt.getText() + "tan(");
+            }
+        }
+    }
+
+    //更改三角函数使用弧度制(RAD)还是角度制(DEG)
+    class Change implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            Button change = (Button)findViewById(R.id.RAD_DEG);
+            switch (flag){
+                case 0:
+                    change.setActivated(true);
+                    change.setText("RAD");
+                    flag = 1;
+                    break;
+                case 1:
+                    change.setActivated(false);
+                    change.setText("DEG");
+                    flag = 0;
+                    break;
             }
         }
     }

@@ -3,13 +3,20 @@ package com.example.calculator;
 import java.util.ArrayList;
 import java.util.Stack;
 
-class noCurlyCalculate {
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
 
+class noCurlyCalculate extends AppCompatActivity {
 
-    public static String Result(String str) {
+    public String Result(String str, String mark) {
         ArrayList<String> ops = getOps(str);
-        ArrayList<Double> num = getNum(str);
+        ArrayList<Double> num = getNum(str, mark);
         String computable = "true";
         // 先乘除再加减
         for (int i = 0; i < ops.size(); i++) {
@@ -76,7 +83,7 @@ class noCurlyCalculate {
     /**
      * 获取符号 1.首位 和 * /后面 的-变成@,其他的-不用
      */
-    private static ArrayList getNum(String str) {
+    private ArrayList getNum(String str, String mark) {
         // -变成@
         str = change(str);
         ArrayList<Double> list = new ArrayList();
@@ -97,26 +104,52 @@ class noCurlyCalculate {
                 }
                 s = String.valueOf(S);
             }
-            if(s.contains("sin")){
-                String[] triNum = s.split("n");
-                double d = Double.parseDouble(triNum[1]);
-                double dRadians = Math.toRadians(d);
-                double number = Double.parseDouble(String.format("%.5f", Math.sin(dRadians)));
-                s = String.valueOf(number);
-            }
-            if(s.contains("tan")){
-                String[] triNum = s.split("n");
-                double d = Double.parseDouble(triNum[1]);
-                double dRadians = Math.toRadians(d);
-                double number = Double.parseDouble(String.format("%.5f", Math.tan(dRadians)));
-                s = String.valueOf(number);
-            }
-            if(s.contains("cos")){
-                String[] triNum = s.split("s");
-                double d = Double.parseDouble(triNum[1]);
-                double dRadians = Math.toRadians(d);
-                double number = Double.parseDouble(String.format("%.5f", Math.cos(dRadians)));
-                s = String.valueOf(number);
+
+            if (s.contains("sin")||s.contains("cos")||s.contains("tan")) {
+                //Button change = (Button) findViewById(R.id.RAD_DEG);
+                if(mark.equals("DEG")) {
+                    if (s.contains("sin")) {
+                        String[] triNum = s.split("n");
+                        double d = Double.parseDouble(triNum[1]);
+                        double dRadians = Math.toRadians(d);
+                        double number = Double.parseDouble(String.format("%.5f", Math.sin(dRadians)));
+                        s = String.valueOf(number);
+                    }
+                    if (s.contains("tan")) {
+                        String[] triNum = s.split("n");
+                        double d = Double.parseDouble(triNum[1]);
+                        double dRadians = Math.toRadians(d);
+                        double number = Double.parseDouble(String.format("%.5f", Math.tan(dRadians)));
+                        s = String.valueOf(number);
+                    }
+                    if (s.contains("cos")) {
+                        String[] triNum = s.split("s");
+                        double d = Double.parseDouble(triNum[1]);
+                        double dRadians = Math.toRadians(d);
+                        double number = Double.parseDouble(String.format("%.5f", Math.cos(dRadians)));
+                        s = String.valueOf(number);
+                    }
+                }
+                else{
+                    if (s.contains("sin")) {
+                        String[] triNum = s.split("n");
+                        double d = Double.parseDouble(triNum[1]);
+                        double number = Double.parseDouble(String.format("%.5f", Math.sin(d)));
+                        s = String.valueOf(number);
+                    }
+                    if (s.contains("tan")) {
+                        String[] triNum = s.split("n");
+                        double d = Double.parseDouble(triNum[1]);
+                        double number = Double.parseDouble(String.format("%.5f", Math.sin(d)));
+                        s = String.valueOf(number);
+                    }
+                    if (s.contains("cos")) {
+                        String[] triNum = s.split("s");
+                        double d = Double.parseDouble(triNum[1]);
+                        double number = Double.parseDouble(String.format("%.5f", Math.sin(d)));
+                        s = String.valueOf(number);
+                    }
+                }
             }
             //System.out.println(s+",");
             if(!s.equals("")) {

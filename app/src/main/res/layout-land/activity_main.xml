@@ -20,8 +20,8 @@
             android:layout_columnSpan="7"
             android:layout_gravity="fill"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="25dp"
-            android:textSize="40dp"
+            android:layout_marginRight="60dp"
+            android:textSize="30dp"
             tools:ignore="MissingConstraints" />
 
         <!--<Button-->
@@ -263,13 +263,14 @@
             android:textSize="30dp" />
 
         <Button
-            android:id="@+id/conversion"
+            android:id="@+id/RAD_DEG"
             android:layout_rowSpan="1"
             android:layout_columnSpan="1"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
+            android:background="@drawable/rad_deg"
             android:textAllCaps="false"
-            android:text="换算"
+            android:text="DEG"
             android:textSize="30dp" />
 
         <Button

@@ -22,7 +22,7 @@ class Calculate {
 //        }
 //   }
 
-    public static String calcDemo(String str) {
+    public String calcDemo(String str, String mark) {
         // 加上括号,这样就能当作最终的表达式并判断，最终求出结果
         str = "(" + str + ")";
         // 括弧:先判断左括号和右括号是否相等,再判断括号是否左右是否匹配
@@ -64,7 +64,8 @@ class Calculate {
                 }
                 // 获取括号中的式子,计算成结果,在放入集合变成新的式子
                 String strCalc = part.substring(1, part.length() - 1);//这里1到part.length()-1是去除了左右两边括号的
-                String num = noCurlyCalculate.Result(strCalc);
+                noCurlyCalculate getResult = new noCurlyCalculate();
+                String num = getResult.Result(strCalc, mark);
                 if(num.equals("false")){
                     return "错误";
                 }
