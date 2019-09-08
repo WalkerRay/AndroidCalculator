@@ -14,12 +14,7 @@ class Calculate {
 //    }
 
 //    public static void main(String[] args) {
-//        String str = "1sin(30)";
-//        String[] split = str.split("\\+|\\-|\\*|/|sin");
-//        //String[] split = str.split("sin");
-//        for(int i = 0; i < split.length; i++) {
-//            System.out.println(split[i]);
-//        }
+//        System.out.println(Math.E);
 //   }
 
     public String calcDemo(String str, String mark) {

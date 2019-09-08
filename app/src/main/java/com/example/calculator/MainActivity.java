@@ -136,6 +136,12 @@ public class MainActivity extends AppCompatActivity {
         Button cos = (Button)findViewById(R.id.cos);
         Button tan = (Button)findViewById(R.id.tan);
         Button change = (Button)findViewById(R.id.RAD_DEG);
+        Button power = (Button)findViewById(R.id.power);
+        Button reciprocal = (Button)findViewById(R.id.reciprocal);
+        Button square = (Button)findViewById(R.id.square);
+        Button xextracty = (Button)findViewById(R.id.XextractY);
+        Button e = (Button)findViewById(R.id.E);
+        Button pi = (Button)findViewById(R.id.PI);
 
         btn1.setOnClickListener(new Listener1());
         btn2.setOnClickListener(new Listener2());
@@ -162,6 +168,12 @@ public class MainActivity extends AppCompatActivity {
         cos.setOnClickListener(new Cos());
         tan.setOnClickListener(new Tan());
         change.setOnClickListener(new Change());
+        power.setOnClickListener(new Power());
+        reciprocal.setOnClickListener(new Reciprocal());
+        square.setOnClickListener(new Square());
+        xextracty.setOnClickListener(new XextractY());
+        e.setOnClickListener(new Enatural());
+        pi.setOnClickListener(new PI());
     }
 
 
@@ -224,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(Txt.substring(0, Txt.length() - 1)+"1");
             }
             else {
-                if(MulSupJudForNum(txt)){
+                if(MulSupJudForNum(txt) || !noRepeat(txt, "e") || !noRepeat(txt, "π")){
                     txt.setText(txt.getText()+"*1");
                 }
                 else
@@ -242,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(Txt.substring(0, Txt.length() - 1)+"2");
             }
             else {
-                if(MulSupJudForNum(txt)){
+                if(MulSupJudForNum(txt) || !noRepeat(txt, "e") || !noRepeat(txt, "π")){
                     txt.setText(txt.getText()+"*2");
                 }
                 else
@@ -260,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(Txt.substring(0, Txt.length() - 1)+"3");
             }
             else {
-                if(MulSupJudForNum(txt)){
+                if(MulSupJudForNum(txt) || !noRepeat(txt, "e") || !noRepeat(txt, "π")){
                     txt.setText(txt.getText()+"*3");
                 }
                 else
@@ -278,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(Txt.substring(0, Txt.length() - 1)+"4");
             }
             else {
-                if(MulSupJudForNum(txt)){
+                if(MulSupJudForNum(txt) || !noRepeat(txt, "e") || !noRepeat(txt, "π")){
                     txt.setText(txt.getText()+"*4");
                 }
                 else
@@ -296,7 +308,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(Txt.substring(0, Txt.length() - 1)+"5");
             }
             else {
-                if(MulSupJudForNum(txt)){
+                if(MulSupJudForNum(txt) || !noRepeat(txt, "e") || !noRepeat(txt, "π")){
                     txt.setText(txt.getText()+"*5");
                 }
                 else
@@ -314,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(Txt.substring(0, Txt.length() - 1)+"6");
             }
             else {
-                if(MulSupJudForNum(txt)){
+                if(MulSupJudForNum(txt) || !noRepeat(txt, "e") || !noRepeat(txt, "π")){
                     txt.setText(txt.getText()+"*6");
                 }
                 else
@@ -332,7 +344,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(Txt.substring(0, Txt.length() - 1)+"7");
             }
             else {
-                if(MulSupJudForNum(txt)){
+                if(MulSupJudForNum(txt) || !noRepeat(txt, "e") || !noRepeat(txt, "π")){
                     txt.setText(txt.getText()+"*7");
                 }
                 else
@@ -350,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(Txt.substring(0, Txt.length() - 1)+"8");
             }
             else {
-                if(MulSupJudForNum(txt)){
+                if(MulSupJudForNum(txt) || !noRepeat(txt, "e") || !noRepeat(txt, "π")){
                     txt.setText(txt.getText()+"*8");
                 }
                 else
@@ -368,7 +380,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(Txt.substring(0, Txt.length() - 1)+"9");
             }
             else {
-                if(MulSupJudForNum(txt)){
+                if(MulSupJudForNum(txt) || !noRepeat(txt, "e") || !noRepeat(txt, "π")){
                     txt.setText(txt.getText()+"*9");
                 }
                 else
@@ -386,7 +398,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(Txt.substring(0, Txt.length() - 1)+"0");
             }
             else {
-                if(MulSupJudForNum(txt)){
+                if(MulSupJudForNum(txt) || !noRepeat(txt, "e") || !noRepeat(txt, "π")){
                     txt.setText(txt.getText()+"*0");
                 }
                 else
@@ -451,7 +463,7 @@ public class MainActivity extends AppCompatActivity {
             if(!noRepeat(txt, "+")) {
                 txt.setText(Txt.substring(0, Txt.length() - 1) + "-");
             }
-            if(noRepeat(txt, "-") && noRepeat(txt, "(")) {
+            if(noRepeat(txt, "-")) {
                 txt.setText(txt.getText() + "-");
             }
         }
@@ -511,7 +523,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(txt.getText()+"*0.");
             }
             //补全0.，当直接点击dot时补全为0.
-            if(txt.getText().length() == 0 || !pdLimit(txt)){
+            if(txt.getText().length() == 0 || !pdLimit(txt) || !noRepeat(txt, "(")){
                 txt.setText(txt.getText()+"0.");
             }
             //不需补全的dot
@@ -612,6 +624,85 @@ public class MainActivity extends AppCompatActivity {
                     change.setText("DEG");
                     flag = 0;
                     break;
+            }
+        }
+    }
+
+    //n次方运算
+    class Power implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            TextView txt = (TextView) findViewById(R.id.result);
+            if(txt.getText().length() != 0 && noRepeat(txt, "(") && pdLimit(txt)){
+                txt.setText(txt.getText() + "^(");
+            }
+        }
+    }
+
+    //倒数运算
+    class Reciprocal implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            TextView txt = (TextView) findViewById(R.id.result);
+            if(txt.getText().length() != 0 && noRepeat(txt, "(") && pdLimit(txt)){
+                txt.setText(txt.getText() + "^(-1)");
+            }
+        }
+    }
+
+    //平方运算
+    class Square implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            TextView txt = (TextView) findViewById(R.id.result);
+            if(txt.getText().length() != 0 && noRepeat(txt, "(") && pdLimit(txt)){
+                txt.setText(txt.getText() + "^(2)");
+            }
+        }
+    }
+
+    //y√x
+    class XextractY implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            TextView txt = (TextView) findViewById(R.id.result);
+            if(txt.getText().length() != 0 && noRepeat(txt, "(") && pdLimit(txt)){
+                txt.setText(txt.getText() + "^(1/");
+            }
+        }
+    }
+
+    class Enatural implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            TextView txt = (TextView) findViewById(R.id.result);
+            String Txt = (String)txt.getText();
+            if(zeroLimit(txt)){
+                txt.setText(Txt.substring(0, Txt.length() - 1)+"e");
+            }
+            else {
+                if(MulSupJudForNum(txt) || MulSupJudForLeftCurly(txt) || !noRepeat(txt, "e")){
+                    txt.setText(txt.getText()+"*e");
+                }
+                else
+                    txt.setText(txt.getText() + "e");
+            }
+        }
+    }
+    class PI implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            TextView txt = (TextView) findViewById(R.id.result);
+            String Txt = (String)txt.getText();
+            if(zeroLimit(txt)){
+                txt.setText(Txt.substring(0, Txt.length() - 1)+"π");
+            }
+            else {
+                if(MulSupJudForNum(txt) || MulSupJudForLeftCurly(txt) || !noRepeat(txt, "π")){
+                    txt.setText(txt.getText()+"*π");
+                }
+                else
+                    txt.setText(txt.getText() + "π");
             }
         }
     }

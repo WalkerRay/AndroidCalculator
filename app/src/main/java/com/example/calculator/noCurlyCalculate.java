@@ -17,10 +17,12 @@ class noCurlyCalculate extends AppCompatActivity {
     public String Result(String str, String mark) {
         ArrayList<String> ops = getOps(str);
         ArrayList<Double> num = getNum(str, mark);
+
         String computable = "true";
         // 先乘除再加减
         for (int i = 0; i < ops.size(); i++) {
-            if (ops.get(i).contains("*") || ops.get(i).contains("/")) {
+
+             if (ops.get(i).contains("*") || ops.get(i).contains("/")) {
                 String op = ops.remove(i);
                 if (op.equals("*")) {
                     // 从数字集合取对应和后面一位数字
@@ -28,7 +30,6 @@ class noCurlyCalculate extends AppCompatActivity {
                     if(num.isEmpty()){
                         return "false";
                     }
-
                     double d2 = num.remove(i);
                     double number = ArithUtil.mul(d1, d2);
                     //再加上
@@ -89,12 +90,223 @@ class noCurlyCalculate extends AppCompatActivity {
         ArrayList<Double> list = new ArrayList();
 
         String[] split = str.split("\\+|\\-|\\*|/");
+
         for (int i = 0; i < split.length; i++) { // @3,5,@4,9,@3
             String s = split[i];
-            // 再把@变成-
+            // 再把@变成-,得到负数
             if (s.contains("@")) {
-                s = '-' + s.substring(1);
+                s = s.replace("@", "-");
             }
+            //自然对数
+            if(s.equals("e")){
+                s = String.valueOf(Math.E);
+            }
+            //π
+            if(s.equals("π")){
+                s = String.valueOf(Math.PI);
+            }
+            //得到三角函数运算结果
+            if (s.contains("sin")||s.contains("cos")||s.contains("tan")) {
+                //Button change = (Button) findViewById(R.id.RAD_DEG);
+                //角度制三角函数运算
+                if(mark.equals("DEG")) {
+                    if (s.contains("sin")) {
+                        //分割出数字部分（triNum[1]）
+                        String[] triNum = s.split("n");
+                        //最终结果number
+                        double number = 0;
+                        //如果有%
+                        if(triNum[1].contains("%")){
+                            //计算%数量并提取出不含%的部分
+                            int size = countPercent(triNum[1]);
+                            triNum[1] = triNum[1].substring(0, triNum[1].length()-size);
+                            double d = Double.parseDouble(triNum[1]);
+                            //计算出sin结果
+                            double dRadians = Math.toRadians(d);
+                            number = Double.parseDouble(String.format("%.8f", Math.sin(dRadians)));
+                            //计算出含%的最终结果
+                            for(int j = 0; j < size; j++) {
+                                number = ArithUtil.mul(0.01, number);
+                            }
+                            //判断是否有负号
+                            if (triNum[0].contains("-")) {
+                                number = 0 - number;
+                            }
+                            s = String.valueOf(number);
+                        }
+                        //不含%情况
+                        else {
+                            double d = Double.parseDouble(triNum[1]);
+                            double dRadians = Math.toRadians(d);
+                            number = Double.parseDouble(String.format("%.8f", Math.sin(dRadians)));
+                            if (triNum[0].contains("-")) {
+                                number = 0 - number;
+                            }
+                        }
+                        s = String.valueOf(number);
+                    }
+                    if (s.contains("tan")) {
+                        String[] triNum = s.split("n");
+                        double number = 0;
+                        if(triNum[1].contains("%")){
+                            int size = countPercent(triNum[1]);
+                            triNum[1] = triNum[1].substring(0, triNum[1].length()-size);
+                            double d = Double.parseDouble(triNum[1]);
+                            double dRadians = Math.toRadians(d);
+                            number = Double.parseDouble(String.format("%.8f", Math.tan(dRadians)));
+                            for(int j = 0; j < size; j++) {
+                                number = ArithUtil.mul(0.01, number);
+                            }
+                            if (triNum[0].contains("-")) {
+                                number = 0 - number;
+                            }
+                            s = String.valueOf(number);
+                        }
+                        else {
+                            double d = Double.parseDouble(triNum[1]);
+                            double dRadians = Math.toRadians(d);
+                            number = Double.parseDouble(String.format("%.8f", Math.tan(dRadians)));
+                            if (triNum[0].contains("-")) {
+                                number = 0 - number;
+                            }
+                        }
+                        s = String.valueOf(number);
+                    }
+                    if (s.contains("cos")) {
+                        String[] triNum = s.split("s");
+                        double number = 0;
+                        if(triNum[1].contains("%")){
+                            int size = countPercent(triNum[1]);
+                            triNum[1] = triNum[1].substring(0, triNum[1].length()-size);
+                            double d = Double.parseDouble(triNum[1]);
+                            double dRadians = Math.toRadians(d);
+                            number = Double.parseDouble(String.format("%.8f", Math.cos(dRadians)));
+                            for(int j = 0; j < size; j++) {
+                                number = ArithUtil.mul(0.01, number);
+                            }
+                            if (triNum[0].contains("-")) {
+                                number = 0 - number;
+                            }
+                            s = String.valueOf(number);
+                        }
+                        else {
+                            double d = Double.parseDouble(triNum[1]);
+                            double dRadians = Math.toRadians(d);
+                            number = Double.parseDouble(String.format("%.8f", Math.cos(dRadians)));
+                            if (triNum[0].contains("-")) {
+                                number = 0 - number;
+                            }
+                        }
+                        s = String.valueOf(number);
+                    }
+                }
+                //弧度制计算
+                else{
+                    if (s.contains("sin")) {
+                        //分割出数字部分（triNum[1]）
+                        String[] triNum = s.split("n");
+                        //最终结果number
+                        double number = 0;
+                        //如果有%
+                        if(triNum[1].contains("%")){
+                            //计算%数量并提取出不含%的部分
+                            int size = countPercent(triNum[1]);
+                            triNum[1] = triNum[1].substring(0, triNum[1].length()-size);
+                            double d = Double.parseDouble(triNum[1]);
+                            //计算出sin结果
+                            number = Double.parseDouble(String.format("%.8f", Math.sin(d)));
+                            //计算出含%的最终结果
+                            for(int j = 0; j < size; j++) {
+                                number = ArithUtil.mul(0.01, number);
+                            }
+                            //判断是否有负号
+                            if (triNum[0].contains("-")) {
+                                number = 0 - number;
+                            }
+                            s = String.valueOf(number);
+                        }
+                        //不含%情况
+                        else {
+                            double d = Double.parseDouble(triNum[1]);
+                            number = Double.parseDouble(String.format("%.8f", Math.sin(d)));
+                            if (triNum[0].contains("-")) {
+                                number = 0 - number;
+                            }
+                        }
+                        s = String.valueOf(number);
+                    }
+                    if (s.contains("tan")) {
+                        String[] triNum = s.split("n");
+                        double number = 0;
+                        if(triNum[1].contains("%")){
+                            int size = countPercent(triNum[1]);
+                            triNum[1] = triNum[1].substring(0, triNum[1].length()-size);
+                            double d = Double.parseDouble(triNum[1]);
+                            number = Double.parseDouble(String.format("%.8f", Math.tan(d)));
+                            for(int j = 0; j < size; j++) {
+                                number = ArithUtil.mul(0.01, number);
+                            }
+                            if (triNum[0].contains("-")) {
+                                number = 0 - number;
+                            }
+                            s = String.valueOf(number);
+                        }
+                        else {
+                            double d = Double.parseDouble(triNum[1]);
+                            number = Double.parseDouble(String.format("%.8f", Math.tan(d)));
+                            if (triNum[0].contains("-")) {
+                                number = 0 - number;
+                            }
+                        }
+                        s = String.valueOf(number);
+                    }
+                    if (s.contains("cos")) {
+                        String[] triNum = s.split("s");
+                        double number = 0;
+                        if(triNum[1].contains("%")){
+                            int size = countPercent(triNum[1]);
+                            triNum[1] = triNum[1].substring(0, triNum[1].length()-size);
+                            double d = Double.parseDouble(triNum[1]);
+                            number = Double.parseDouble(String.format("%.8f", Math.cos(d)));
+                            for(int j = 0; j < size; j++) {
+                                number = ArithUtil.mul(0.01, number);
+                            }
+                            if (triNum[0].contains("-")) {
+                                number = 0 - number;
+                            }
+                            s = String.valueOf(number);
+                        }
+                        else {
+                            double d = Double.parseDouble(triNum[1]);
+                            number = Double.parseDouble(String.format("%.8f", Math.cos(d)));
+                            if (triNum[0].contains("-")) {
+                                number = 0 - number;
+                            }
+                        }
+                        s = String.valueOf(number);
+                    }
+                }
+            }
+            //得到幂运算后的结果
+            if(s.contains("^")){
+                String[] powNum = s.split("\\^");
+                double d1 = Double.parseDouble(powNum[0]);
+                int size = 0;
+                //次方运算后有%
+                if(powNum[1].contains("%")){
+                    size = countPercent(powNum[1]);
+                    powNum[1] = powNum[1].substring(0, powNum[1].length()-size);
+                }
+                double d2 = Double.parseDouble(powNum[1]);
+                double S = ArithUtil.pow(d1, d2);
+                S = Double.parseDouble(String.format("%.8f", S));
+                for(int j = 0; j < size; j++) {
+                    S = ArithUtil.mul(0.01, S);
+                }
+                s = String.valueOf(S);
+            }
+
+            //得到百分数
             if(s.contains("%")){
                 int size = countPercent(s);
                 s = s.substring(0, s.length()-size);
@@ -105,53 +317,6 @@ class noCurlyCalculate extends AppCompatActivity {
                 s = String.valueOf(S);
             }
 
-            if (s.contains("sin")||s.contains("cos")||s.contains("tan")) {
-                //Button change = (Button) findViewById(R.id.RAD_DEG);
-                if(mark.equals("DEG")) {
-                    if (s.contains("sin")) {
-                        String[] triNum = s.split("n");
-                        double d = Double.parseDouble(triNum[1]);
-                        double dRadians = Math.toRadians(d);
-                        double number = Double.parseDouble(String.format("%.5f", Math.sin(dRadians)));
-                        s = String.valueOf(number);
-                    }
-                    if (s.contains("tan")) {
-                        String[] triNum = s.split("n");
-                        double d = Double.parseDouble(triNum[1]);
-                        double dRadians = Math.toRadians(d);
-                        double number = Double.parseDouble(String.format("%.5f", Math.tan(dRadians)));
-                        s = String.valueOf(number);
-                    }
-                    if (s.contains("cos")) {
-                        String[] triNum = s.split("s");
-                        double d = Double.parseDouble(triNum[1]);
-                        double dRadians = Math.toRadians(d);
-                        double number = Double.parseDouble(String.format("%.5f", Math.cos(dRadians)));
-                        s = String.valueOf(number);
-                    }
-                }
-                else{
-                    if (s.contains("sin")) {
-                        String[] triNum = s.split("n");
-                        double d = Double.parseDouble(triNum[1]);
-                        double number = Double.parseDouble(String.format("%.5f", Math.sin(d)));
-                        s = String.valueOf(number);
-                    }
-                    if (s.contains("tan")) {
-                        String[] triNum = s.split("n");
-                        double d = Double.parseDouble(triNum[1]);
-                        double number = Double.parseDouble(String.format("%.5f", Math.sin(d)));
-                        s = String.valueOf(number);
-                    }
-                    if (s.contains("cos")) {
-                        String[] triNum = s.split("s");
-                        double d = Double.parseDouble(triNum[1]);
-                        double number = Double.parseDouble(String.format("%.5f", Math.sin(d)));
-                        s = String.valueOf(number);
-                    }
-                }
-            }
-            //System.out.println(s+",");
             if(!s.equals("")) {
                 list.add(Double.parseDouble(s));
             }
@@ -173,7 +338,7 @@ class noCurlyCalculate extends AppCompatActivity {
                 break;
             }
             // @3+5*@4-9/@3
-            if (chars[i] == '*' && chars[i + 1] == '-' || chars[i] == '/' && chars[i + 1] == '-') {
+            if (chars[i] == '*' && chars[i + 1] == '-' || chars[i] == '/' && chars[i + 1] == '-' || chars[i] == '^' && chars[i + 1] == '-') {
                 str = str.substring(0, i + 1) + '@' + str.substring(i + 2);
             }
         }
@@ -186,7 +351,7 @@ class noCurlyCalculate extends AppCompatActivity {
         // -变@
         str = change(str);
         // @3+5*@4-9/@3
-        String[] split = str.split("[0-9|\\.|@|%|sin|cos|tan]");// 表示0-9包括小数和@和%
+        String[] split = str.split("[0-9|\\.|@|%|sin|cos|tan|e|π]");// 表示0-9包括小数和@和%
         for (int i = 0; i < split.length; i++) {
             if (split[i].contains("+") || split[i].contains("-") || split[i].contains("*") || split[i].contains("/")) {
                 list.add(split[i]);
