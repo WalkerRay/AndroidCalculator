@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    >
+
+    <GridLayout
+        android:id="@+id/gridLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:columnCount="7"
+        android:orientation="horizontal"
+        android:rowCount="6"
+        tools:ignore="MissingConstraints"><!--水平排列 -->
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="7"
+            android:layout_gravity="fill"
+            android:textSize="30dp"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/openCurly"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:text="("
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/closeCurly"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:text=")"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/reciprocal"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:text="1/x"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/Clear"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="C"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/Divide"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="/"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/Multiply"
+            android:layout_row="0"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="*"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/Delete"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="&lt;-"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/square"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:text="x^2"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/power"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="x^y"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/extract"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="√"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/num1"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="1"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/num2"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="2"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/num3"
+            android:layout_height="wrap_content"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="3"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/Subtract"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="-"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/XextractY"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:text="y√x"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/E"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="e"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/Ln"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="ln"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/num4"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="4"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/num5"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="5"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/num6"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="6"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/Plus"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="+"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/Log"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:text="log"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/PI"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="π"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/sin"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="sin"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/num7"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="7"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/num8"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="8"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/num9"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="9"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/Equal"
+            android:layout_rowSpan="2"
+            android:layout_columnSpan="1"
+            android:layout_gravity="fill"
+
+            android:text="="
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/cos"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:text="cos"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/tan"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="tan"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/RAD_DEG"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:background="@drawable/rad_deg"
+            android:text="DEG"
+            android:textAllCaps="false"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/Percent"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="%"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/num0"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="0"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/Dot"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+
+            android:text="."
+            android:textSize="15dp" />
+
+
+    </GridLayout>
+
+</FrameLayout>
