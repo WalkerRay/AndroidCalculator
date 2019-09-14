@@ -4,4 +4,44 @@
     <drawable name="color1">#ff0000</drawable><!--红色-->
 
     <drawable name="color2">#87ceeb</drawable><!--天蓝色-->
+    <string-array name="spinner_list">
+               
+        <item>2进制</item>
+               
+        <item>8进制</item>
+               
+        <item>10进制</item>
+               
+        <item>16进制</item>
+           
+    </string-array>
+    <string-array name="spinner_length">
+               
+        <item>mm</item>
+               
+        <item>cm</item>
+               
+        <item>m</item>
+               
+        <item>km</item>
+           
+    </string-array>
+    <string-array name="spinner_volume">
+               
+        <item>ml</item>
+               
+        <item>L</item>
+               
+        <item>cm^3</item>
+               
+        <item>m^3</item>
+           
+    </string-array>
+    <string-array name="spinner_money">
+               
+        <item>人民币(￥)</item>
+               
+        <item>美元($)</item>
+           
+    </string-array>
 </resources>

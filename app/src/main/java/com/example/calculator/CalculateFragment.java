@@ -3,6 +3,8 @@ package com.example.calculator;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 import android.os.Bundle;
 import android.util.Log;
 import android.content.res.Configuration;
+
+import org.litepal.LitePal;
 
 import calculate.Calculate;
 
@@ -30,7 +34,6 @@ public class CalculateFragment extends Fragment{
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.calculate_fragment);
         View calculator = inflater.inflate(R.layout.calculate_fragment, container,false);
-
         //
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             PORTRAIT(calculator);
@@ -49,6 +52,7 @@ public class CalculateFragment extends Fragment{
         }
         return calculator;
     }
+
 
     //切换横竖屏保存数据
     @Override
@@ -565,17 +569,34 @@ public class CalculateFragment extends Fragment{
             TextView txt = (TextView) getView().findViewById(R.id.result);
             Configuration mConfiguration = getResources().getConfiguration();
             int ori =  mConfiguration.orientation;
-            if(ori == mConfiguration.ORIENTATION_LANDSCAPE && txt.getText().length()!=0){
+            if(txt.getText().equals("括号不匹配，请重新输入") || txt.getText().equals("错误") || txt.getText().equals("包含了空的括号，不符合,请检查重新输入")){
+
+            }
+            else if(ori == mConfiguration.ORIENTATION_LANDSCAPE && txt.getText().length()!=0){
                 Button mark = (Button) getView().findViewById(R.id.RAD_DEG);
+                //Mark用于判断是角度制还是弧度制
                 String Mark = (String)mark.getText();
                 String Txt = (String)txt.getText();
+
+                CalculatorModel model = new CalculatorModel();
+                model.setExpression(Txt);
+
                 Calculate cal = new Calculate();
+                model.setResult(cal.calcDemo(Txt, Mark));
+                model.save();
                 txt.setText(cal.calcDemo(Txt, Mark));
             }
             else if(ori == mConfiguration.ORIENTATION_PORTRAIT && txt.getText().length()!=0){
                 String Mark = "null";
                 String Txt = (String)txt.getText();
+                CalculatorModel model = new CalculatorModel();
+                model.setExpression(Txt);
+
                 Calculate cal = new Calculate();
+
+                model.setResult(cal.calcDemo(Txt, Mark));
+                model.save();
+
                 txt.setText(cal.calcDemo(Txt, Mark));
             }
 

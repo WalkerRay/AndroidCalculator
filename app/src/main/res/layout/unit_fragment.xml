@@ -3,10 +3,146 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="'单位换算'界面"
-        android:textSize="25sp"/>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="1"
+        android:orientation="horizontal"
+        android:rowCount="8"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:text="请选择被转换的长度单位"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_lengthfrom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                />
+            <EditText
+                android:id="@+id/length1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:text="请选择转换为哪个单位"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_lengthto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                />
+            <TextView
+                android:id="@+id/length2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                />
+
+            <Button
+                android:id="@+id/start1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="转换长度"
+                android:textSize="25dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:text="请选择被转换的体积单位"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_volumefrom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                />
+            <EditText
+                android:id="@+id/volume1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_rowSpan="1"
+            android:layout_columnSpan="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:text="请选择转换为哪个单位"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_volumeto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                />
+            <TextView
+                android:id="@+id/volume2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                />
+
+            <Button
+                android:id="@+id/start2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="转换体积"
+                android:textSize="25dp"
+                />
+
+        </LinearLayout>
+
+    </GridLayout>
 </FrameLayout>

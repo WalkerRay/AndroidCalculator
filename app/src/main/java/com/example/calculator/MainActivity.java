@@ -1,9 +1,15 @@
 package com.example.calculator;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.os.Bundle;
@@ -15,8 +21,14 @@ import java.util.List;
 import java.util.ArrayList;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
+import android.os.StrictMode;
+import android.widget.Toast;
+
+import org.litepal.LitePal;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private static final String TAG = "MainActivity";
 
     //用于标记切换角度制弧度制的状态
     private int flag = 0;
@@ -36,12 +48,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        LitePal.getDatabase();
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
         //if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
         initViews();
         //去除工具栏
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         mFragmentAdapter = new FragmentAdapter(this.getSupportFragmentManager(), mFragmentList);
 //        vp = (ViewPager) findViewById(R.id.mainViewPager);
@@ -72,6 +86,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 arg0==0的时辰默示什么都没做。*/
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main, menu);
+        Log.d(TAG, "onCreateOptionsMenu: "+"menuOK");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.history_item:
+                Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.help_item:
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("帮助");
+                builder.setMessage("一个计算器");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).show();
+                break;
+                default:
+        }
+        return true;
     }
 
     //onClick事件（点击底部Text动态修改ViewPager内容）

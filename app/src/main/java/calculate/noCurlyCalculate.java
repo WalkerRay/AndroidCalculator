@@ -1,14 +1,6 @@
 package calculate;
 
 import java.util.ArrayList;
-import java.util.Stack;
-
-import android.app.Activity;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 

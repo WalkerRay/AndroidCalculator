@@ -6,25 +6,7 @@ import java.util.Stack;
 
 
 public class Calculate {
-//    public static void main(String[] args) {
-//        String str = "@3+5.0*@4-9/@3";
-//        String[] split = str.split("[0-9\\.@]");
-//        for (int i = 0; i < split.length; i++) {
-//            System.out.println(split[i]);
-//        }
-//    }
 
-//    public static void main(String[] args) {
-//        String s = "√4";
-//        String S = s.substring(1, s.length());
-//        double d1 = Double.parseDouble(S);
-//        System.out.println(d1);
-//        double d2 = 1.0/2.0;
-//        double number = ArithUtil.pow(d1, d2);
-//        System.out.println(number);
-//        s = String.valueOf(number);
-//        System.out.println(s);
-//    }
 
     public String calcDemo(String str, String mark) {
         // 加上括号,这样就能当作最终的表达式并判断，最终求出结果
