@@ -207,13 +207,13 @@ public class CalculateFragment extends Fragment{
         return false;
     }
 
-    //判断乘号是否需要补全，当数字在右侧连接右括号时补全*
+    //判断乘号是否需要补全，当数字在右侧连接右括号和%时补全*
     public boolean MulSupJudForNum(TextView txt){
         String Txt = (String)txt.getText();
         if(Txt.length() == 0){
             return false;
         }
-        else if(Txt.substring(Txt.length()-1, Txt.length()).equals(")")){
+        else if(Txt.substring(Txt.length()-1, Txt.length()).equals(")") || Txt.substring(Txt.length()-1, Txt.length()).equals("%")){
             return true;
         }
         return false;

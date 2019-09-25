@@ -24,7 +24,7 @@ class noCurlyCalculate extends AppCompatActivity {
                         return "false";
                     }
                     double d2 = num.remove(i);
-                    double number = ArithUtil.pow(d1, d2);
+                    double number = Double.parseDouble(String.format("%.8f", ArithUtil.pow(d1, d2)));
                     //再加上
                     num.add(i, number);
                 }
@@ -158,21 +158,7 @@ class noCurlyCalculate extends AppCompatActivity {
                             }
                             s = String.valueOf(number);
                         }
-//                        //有^的情况同%
-//                        else if(triNum[1].contains("^")){
-//                            String[] S = triNum[1].split("\\^");
-//                            double d = Double.parseDouble(S[0]);
-//                            //计算出sin结果
-//                            double dRadians = Math.toRadians(d);
-//                            number = Double.parseDouble(String.format("%.8f", Math.sin(dRadians)));
-//                            number = ArithUtil.pow(number, Double.parseDouble(S[1]));
-//                            //判断是否有负号
-//                            if (triNum[0].contains("-")) {
-//                                number = 0 - number;
-//                            }
-//                            s = String.valueOf(number);
-//                        }
-                        //不含%情况
+
                         else {
                             double d = Double.parseDouble(triNum[1]);
                             double dRadians = Math.toRadians(d);
@@ -326,24 +312,6 @@ class noCurlyCalculate extends AppCompatActivity {
                 }
             }
 
-//            //得到幂运算后的结果
-//            if(s.contains("^")){
-//                String[] powNum = s.split("\\^");
-//                double d1 = Double.parseDouble(powNum[0]);
-//                int size = 0;
-//                //次方运算后有%
-//                if(powNum[1].contains("%")){
-//                    size = countPercent(powNum[1]);
-//                    powNum[1] = powNum[1].substring(0, powNum[1].length()-size);
-//                }
-//                double d2 = Double.parseDouble(powNum[1]);
-//                double S = ArithUtil.pow(d1, d2);
-//                S = Double.parseDouble(String.format("%.8f", S));
-//                for(int j = 0; j < size; j++) {
-//                    S = ArithUtil.mul(0.01, S);
-//                }
-//                s = String.valueOf(S);
-//            }
 
             //得出ln运算结果
             if (s.contains("ln")) {
